@@ -26,7 +26,7 @@ def main():
     if file is not None:
         original, pred = predict_target(model, file.getvalue(), token=False)
         st.image(original, use_column_width='always', caption='Your original image')
-        st.text(pred)
+        st.text(f"AI Given Label: *{pred}*")
 
 
 if __name__ == '__main__':
