@@ -1,5 +1,6 @@
 import streamlit as st
 import tensorflow as tf
+import numpy as np
 from labels import LABELS
 
 def predict_target(model, img, token=True):
@@ -7,8 +8,8 @@ def predict_target(model, img, token=True):
         img = tf.io.read_file(img)
     img = tf.image.decode_image(img, channels=3)
     im = tf.cast(tf.image.resize(img, size=[224, 224]), dtype=tf.float32)
-    pred = tf.cast(tf.squeeze(model.predict(tf.expand_dims(im, axis=0))))
-    result = LABELS[pred.argmax()]
+    pred = tf.squeeze(model.predict(tf.expand_dims(im, axis=0)))
+    result = LABELS[np.argmax(pred)]
     return im.numpy()/255., result
 
 
