@@ -8,8 +8,8 @@ def predict_target(model, img, token=True):
     img = tf.image.decode_image(img, channels=3)
     im = tf.cast(tf.image.resize(img, size=[224, 224]), dtype=tf.float32)
     pred = tf.squeeze(model.predict(tf.expand_dims(im, axis=0)))
-    st.text(pred)
-    return im.numpy()/255., pred.numpy()
+    result = LABELS[pred.argmax()]
+    return im.numpy()/255., result
 
 
 def main():
@@ -26,7 +26,7 @@ def main():
         original, pred = predict_target(model, file.getvalue(), token=False)
         col1, col2 = st.columns(2)
         col1.image(original, use_column_width='always', caption='Your original image')
-        col2.text(LABELS[pred], caption='AI title')
+        col2.text(pred, caption='AI title')
 
 
 if __name__ == '__main__':
