@@ -20,13 +20,13 @@ def main():
     )
 
     model = tf.keras.models.load_model('model.h5')
-
+    st.header('Futurimo VA.DEV demo')
     st.subheader('Try your own images')
     file = st.file_uploader(label='Your own image')
     if file is not None:
         original, pred = predict_target(model, file.getvalue(), token=False)
         st.image(original, use_column_width='always', caption='Your original image')
-        st.text(f"AI Given Label: *{pred}*")
+        st.text(f"AI Given Label: {pred}")
 
 
 if __name__ == '__main__':
