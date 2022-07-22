@@ -25,9 +25,8 @@ def main():
     file = st.file_uploader(label='Your own image')
     if file is not None:
         original, pred = predict_target(model, file.getvalue(), token=False)
-        col1, col2 = st.columns(2)
-        col1.image(original, use_column_width='always', caption='Your original image')
-        col2.text(pred, caption='AI title')
+        st.image(original, use_column_width='always', caption='Your original image')
+        st.text(pred)
 
 
 if __name__ == '__main__':
